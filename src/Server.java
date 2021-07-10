@@ -18,14 +18,18 @@ public class Server {
 
     private int sum;
 
-    public Server(int port, int X, int Z, int Y) {
+
+    public Server(int port, int X, int Z) {
         // Set values
-        int chunksSize = Z / X;
+        int chunksSize = (int)Math.ceil(((double)Z / X));
+        System.out.println("chunksSize = " + chunksSize);
         this.zList = new ArrayList<>();
+        // Fill zList with values between 1 to Z (in increasing order)
         for (int i = 1; i <= Z; i++) this.zList.add(i);
+        System.out.println("Z = " + this.zList);
+
         this.sum = 0;
 
-        System.out.println("Z = " + zList);
 
 
         clients = new ArrayList<>();
@@ -47,13 +51,16 @@ public class Server {
                 System.out.println("Client accepted");
 
 
-                ArrayList<Integer> subList = new ArrayList<>(zList.subList(fromIndex, toIndex));
+                ArrayList<Integer> subList = new ArrayList<>(this.zList.subList(fromIndex, toIndex));
                 ClientHandler clientThread = new ClientHandler(client, subList);
                 clients.add(clientThread);
                 pool.execute(clientThread);
 
                 fromIndex = toIndex;
                 toIndex += chunksSize;
+                if (toIndex > zList.size()) {
+                    toIndex = zList.size();
+                }
 
                 counter++;
 
@@ -83,23 +90,25 @@ public class Server {
 
 
     public static void main(String[] args) {
-        int X = 5;  // Number of clients
-        int Z = 20; // Size of the list we want to sum
-        int Y = 2;  // Number of cores for each client
+        int X = 10;  // Number of clients
+        int Z = 100; // Size of the list we want to sum
+
         if (args.length == 3) {
             try {
                 X = Integer.parseInt(args[0]);
                 Z = Integer.parseInt(args[1]);
-                Y = Integer.parseInt(args[2]);
+
             } catch (Exception e) {
                 e.printStackTrace();
+                X = 10;  // Number of clients
+                Z = 40; // Size of the list we want to sum
             }
         }
-        System.out.println("X = " + X);
-        System.out.println("Z = " + Z);
-        System.out.println("Y = " + Y);
+        System.out.println("Number of clients: X = " + X);
+        System.out.println("Size of the list we want to sum: Z = " + Z);
+        System.out.println();
 
-        Server server = new Server(5000, X, Z, Y);
+        Server server = new Server(5000, X, Z);
 
 
     }

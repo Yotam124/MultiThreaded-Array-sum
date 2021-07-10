@@ -1,6 +1,6 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ClientHandler implements Runnable {
 
@@ -9,11 +9,11 @@ public class ClientHandler implements Runnable {
     private PrintWriter out;
     private ObjectOutputStream outputStream;
 
-    private List<Integer> subZ;
+    private ArrayList<Integer> subZ;
 
     private int partialSum;
 
-    public ClientHandler(Socket clientSocket, List<Integer> subZ) throws IOException {
+    public ClientHandler(Socket clientSocket, ArrayList<Integer> subZ) throws IOException {
         this.client = clientSocket;
         this.subZ = subZ;
 
