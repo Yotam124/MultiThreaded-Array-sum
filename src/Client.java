@@ -29,6 +29,7 @@ public class Client {
 
             // Communicate;
             ArrayList<Integer> list = (ArrayList<Integer>) inputStream.readObject();
+
             out.println(name + ": " + list);
 
 
@@ -65,8 +66,10 @@ public class Client {
 
             out.println("subSum= " + sum);
 
-//            socket.close();
-//            out.close();
+
+            socket.close();
+            out.close();
+            inputStream.close();
 
 
         } catch (Exception e) {
@@ -75,7 +78,6 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 4};
 
         ArrayList<Client> clients = new ArrayList<>();
         int x = 5;

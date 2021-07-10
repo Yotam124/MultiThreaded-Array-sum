@@ -61,7 +61,7 @@ public class Server {
                     pool.shutdown();
 
                     // Wait until all threads are finish
-                    while (!pool.isTerminated());
+                    while (!pool.isTerminated()) ;
 
                     for (ClientHandler clientHandler : clients) {
                         this.sum += clientHandler.getPartialSum();
@@ -69,28 +69,10 @@ public class Server {
                     break;
 
                 }
-
-
-//                for (ClientHandler clientHandler : clients) {
-//                    if (clientHandler.getPartialSum() != 0) {
-//                        this.sum += clientHandler.getPartialSum();
-//                        clients.remove(clientHandler);
-//                    }
-//                }
-//                System.out.println("counter = " + counter);
-//                System.out.println("clients.size() = " + clients.size());
-
-//                if (counter == X) {
-//                    // Close connection
-//                    serverSocket.close();
-//
-//                    break;
-//                }
-
-
             }
             System.out.println("\nTotal-sum = " + sum);
 
+            serverSocket.close();
 
         } catch (Exception e) {
             System.out.println(e);
@@ -101,8 +83,23 @@ public class Server {
 
 
     public static void main(String[] args) {
+        int X = 5;  // Number of clients
+        int Z = 20; // Size of the list we want to sum
+        int Y = 2;  // Number of cores for each client
+        if (args.length == 3) {
+            try {
+                X = Integer.parseInt(args[0]);
+                Z = Integer.parseInt(args[1]);
+                Y = Integer.parseInt(args[2]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("X = " + X);
+        System.out.println("Z = " + Z);
+        System.out.println("Y = " + Y);
 
-        Server server = new Server(5000, 5, 20, 2);
+        Server server = new Server(5000, X, Z, Y);
 
 
     }
