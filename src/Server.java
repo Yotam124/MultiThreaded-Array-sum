@@ -24,13 +24,12 @@ public class Server {
         int chunksSize = (int)Math.ceil(((double)Z / X));
         System.out.println("chunksSize = " + chunksSize);
         this.zList = new ArrayList<>();
+
         // Fill zList with values between 1 to Z (in increasing order)
         for (int i = 1; i <= Z; i++) this.zList.add(i);
         System.out.println("Z = " + this.zList);
 
         this.sum = 0;
-
-
 
         clients = new ArrayList<>();
         pool = Executors.newFixedThreadPool(X);
@@ -41,6 +40,7 @@ public class Server {
             serverSocket = new ServerSocket(port);
             System.out.println("Server started \nWaiting for a client...");
 
+            // Count the connected clients
             int counter = 0;
 
             int fromIndex = 0;
@@ -50,7 +50,7 @@ public class Server {
                 System.out.println();
                 System.out.println("Client accepted");
 
-
+                // create a sub list for the client to sum
                 ArrayList<Integer> subList = new ArrayList<>(this.zList.subList(fromIndex, toIndex));
                 ClientHandler clientThread = new ClientHandler(client, subList);
                 clients.add(clientThread);
@@ -64,12 +64,14 @@ public class Server {
 
                 counter++;
 
+                // If all expected clients are connected
                 if (counter == X) {
                     pool.shutdown();
 
                     // Wait until all threads are finish
                     while (!pool.isTerminated()) ;
 
+                    // Sum all the clients sub-sum.
                     for (ClientHandler clientHandler : clients) {
                         this.sum += clientHandler.getPartialSum();
                     }

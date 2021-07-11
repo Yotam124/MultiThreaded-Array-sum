@@ -34,11 +34,8 @@ public class Client {
             // Communicate;
             @SuppressWarnings("unchecked")
             ArrayList<Integer> list = (ArrayList<Integer>) inputStream.readObject();
-
             out.println(name + ": " + list);
 
-
-//            int chunksSize = list.size() / this.Y;
             int chunksSize = (int) Math.ceil(((double) list.size() / this.Y));
 
             ExecutorService executor = Executors.newFixedThreadPool(this.Y);
@@ -46,6 +43,8 @@ public class Client {
             int fromIndex = 0;
             int toIndex = chunksSize;
             ArrayList<ParallelSum> parallelSumList = new ArrayList<>();
+
+            // Parallel sum of the list, divided between Y cores
             for (int i = 0; i < this.Y; i++) {
                 ArrayList<Integer> subList = new ArrayList<>(list.subList(fromIndex, toIndex));
                 ParallelSum parallelSum = new ParallelSum(subList);
@@ -73,6 +72,7 @@ public class Client {
             }
             System.out.println("Core's-sum = " + sum + "\n");
 
+            // Send the sum to the Server
             out.println("subSum= " + sum);
 
 

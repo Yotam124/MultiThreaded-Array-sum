@@ -32,17 +32,20 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
+            // Send the sub-list to the client
             outputStream.writeObject(subZ);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
+            // Communicate with the client
             while (true) {
-                String request = in.readLine();
-                System.out.println(request);
-                if (request.contains("subSum=")) {
-                    partialSum = Integer.parseInt(request.split("=")[1].trim());
+                String msg = in.readLine();
+                System.out.println(msg);
+                // If the client has finished summing the sub-list
+                if (msg.contains("subSum=")) {
+                    partialSum = Integer.parseInt(msg.split("=")[1].trim());
                     break;
                 }
 

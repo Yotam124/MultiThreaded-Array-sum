@@ -21,13 +21,7 @@ public class ParallelSum implements Runnable {
 
     @Override
     public void run() {
-
         numList.forEach(integer -> sum += integer);
-//        int a = 0;
-//        for (int i=0 ; i<100000000 / numList.get(1)  ; i++) {
-//            a += i;
-//        }
-        System.out.println("parallel array: " + numList.toString());
     }
 
 
