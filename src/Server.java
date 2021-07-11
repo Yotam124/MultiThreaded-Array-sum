@@ -1,12 +1,8 @@
-import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 public class Server {
 
@@ -21,7 +17,7 @@ public class Server {
 
     public Server(int port, int X, int Z) {
         // Set values
-        int chunksSize = (int)Math.ceil(((double)Z / X));
+        int chunksSize = (int) Math.ceil(((double) Z / X));
         System.out.println("chunksSize = " + chunksSize);
         this.zList = new ArrayList<>();
 
@@ -51,6 +47,7 @@ public class Server {
                 System.out.println("Client accepted");
 
                 // create a sub list for the client to sum
+                // Note: The subList() method time complexity is O(1).
                 ArrayList<Integer> subList = new ArrayList<>(this.zList.subList(fromIndex, toIndex));
                 ClientHandler clientThread = new ClientHandler(client, subList);
                 clients.add(clientThread);
