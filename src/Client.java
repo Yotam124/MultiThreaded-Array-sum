@@ -17,7 +17,7 @@ public class Client {
     String name;
 
     public Client(String ipAddress, int port, String name, int Y) {
-        this.Y = (Y < 1) ? Runtime.getRuntime().availableProcessors() : Y;
+        this.Y = Y;
         this.name = name;
 
         try {
@@ -88,7 +88,7 @@ public class Client {
 
     public static void main(String[] args) {
         int x_DefaultValue = 10;
-        int y_DefaultValue = -1;
+        int y_DefaultValue = Runtime.getRuntime().availableProcessors();
 
 
         int X = x_DefaultValue;   // Number of clients
