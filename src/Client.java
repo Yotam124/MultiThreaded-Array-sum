@@ -102,9 +102,13 @@ public class Client {
                 X = Integer.parseInt(args[0]);
                 if (X <= 0) {
                     X = x_DefaultValue;
-                    System.err.println("X must be greater then 0. Default value now used: X = " + X);
+                    System.err.println("** X must be greater then 0. Default value now used **");
                 }
                 Y = Integer.parseInt(args[1]);
+                if (Y <= 0) {
+                    Y = y_DefaultValue;
+                    System.err.println("** Y must be greater then 0. Default value now used **");
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 X = x_DefaultValue;
