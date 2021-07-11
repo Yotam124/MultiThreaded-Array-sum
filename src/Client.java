@@ -39,7 +39,7 @@ public class Client {
 
 
 //            int chunksSize = list.size() / this.Y;
-            int chunksSize = (int)Math.ceil(((double)list.size() / this.Y));
+            int chunksSize = (int) Math.ceil(((double) list.size() / this.Y));
 
             ExecutorService executor = Executors.newFixedThreadPool(this.Y);
 
@@ -87,8 +87,12 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        String ipAddress = "127.0.0.1";
+        int port = 5000;
+        int numberOfCores = Runtime.getRuntime().availableProcessors();
+
         int x_DefaultValue = 10;
-        int y_DefaultValue = Runtime.getRuntime().availableProcessors();
+        int y_DefaultValue = Math.max((numberOfCores / x_DefaultValue), 2);
 
 
         int X = x_DefaultValue;   // Number of clients
@@ -96,6 +100,10 @@ public class Client {
         if (args.length == 2) { // Getting X and Y
             try {
                 X = Integer.parseInt(args[0]);
+                if (X <= 0) {
+                    X = x_DefaultValue;
+                    System.err.println("X must be greater then 0. Default value now used: X = " + X);
+                }
                 Y = Integer.parseInt(args[1]);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -114,7 +122,7 @@ public class Client {
 
         ArrayList<Client> clients = new ArrayList<>();
         for (int i = 1; i <= X; i++) {
-            clients.add(new Client("127.0.0.1", 5000, "Client-" + i, Y));
+            clients.add(new Client(ipAddress, port, "Client-" + i, Y));
         }
     }
 }

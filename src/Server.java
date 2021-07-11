@@ -90,25 +90,39 @@ public class Server {
 
 
     public static void main(String[] args) {
-        int X = 10;  // Number of clients
-        int Z = 100; // Size of the list we want to sum
+        int port = 5000;
 
-        if (args.length == 3) {
+        int x_DefaultValue = 10;
+        int z_DefaultValue = 100;
+
+        int X = x_DefaultValue;  // Number of clients
+        int Z = z_DefaultValue; // Size of the list we want to sum
+
+        if (args.length == 2) {
             try {
                 X = Integer.parseInt(args[0]);
+                if (X <= 0) {
+                    X = x_DefaultValue;
+                    System.err.println("** X must be greater then 0. Default value now used **");
+                }
+
                 Z = Integer.parseInt(args[1]);
+                if (Z <= 0) {
+                    Z = z_DefaultValue;
+                    System.err.println("** Z must be greater then 0. Default value now used **");
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                X = 10;  // Number of clients
-                Z = 40; // Size of the list we want to sum
+                X = x_DefaultValue;  // Number of clients
+                Z = z_DefaultValue; // Size of the list we want to sum
             }
         }
         System.out.println("Number of clients: X = " + X);
         System.out.println("Size of the list we want to sum: Z = " + Z);
         System.out.println();
 
-        Server server = new Server(5000, X, Z);
+        Server server = new Server(port, X, Z);
 
 
     }
