@@ -14,7 +14,7 @@ Open two cmd windows directed into the project's src folder
     * Complile: ``` javac Server.java ```
     * Run: ``` java Server X Z ```
 
-  > You can also use the Default by running: ``` java Server ``` <br> 
+  > You can also use the Default by running: ``` java Server ```. <br> 
   > X=10 <br>
   > Z=100
     
@@ -23,7 +23,7 @@ Open two cmd windows directed into the project's src folder
    * Complile: ``` javac Client.java ```
    * Run: ``` java Client X Y ``` 
 
-  > You can also use the Default by running: ``` java Client ``` <br> 
+  > You can also use the Default by running: ``` java Client ```. <br> 
   > X=10 <br> 
   > Y=***The real number of cores available*** / X <br> 
   > <br>
