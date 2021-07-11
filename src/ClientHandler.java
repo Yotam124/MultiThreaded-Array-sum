@@ -42,9 +42,10 @@ public class ClientHandler implements Runnable {
             // Communicate with the client
             while (true) {
                 String msg = in.readLine();
+                msg = msg == null ? "Waiting for message.." : msg;
                 System.out.println(msg);
                 // If the client has finished summing the sub-list
-                if (msg.contains("subSum=")) {
+                if (msg != null && msg.contains("subSum=")) {
                     partialSum = Long.parseLong(msg.split("=")[1].trim());
                     break;
                 }
