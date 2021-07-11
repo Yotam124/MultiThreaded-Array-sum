@@ -64,7 +64,7 @@ public class Client {
             while (!executor.isTerminated()) ;
 
             int core_i = 1;
-            int sum = 0;
+            long sum = 0;
             for (ParallelSum p : parallelSumList) {
                 System.out.println("core_" + core_i + ": sum= " + p.getSum() + ", subList= " + p.getNumList());
                 sum += p.getSum();

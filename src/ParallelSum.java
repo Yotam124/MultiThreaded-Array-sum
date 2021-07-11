@@ -3,7 +3,7 @@ import java.util.List;
 
 public class ParallelSum implements Runnable {
 
-    private int sum;
+    private long sum;
     private ArrayList<Integer> numList;
 
     public ParallelSum(ArrayList<Integer> numList) {
@@ -11,7 +11,7 @@ public class ParallelSum implements Runnable {
         this.sum = 0;
     }
 
-    public int getSum() {
+    public long getSum() {
         return this.sum;
     }
 

@@ -11,7 +11,7 @@ public class ClientHandler implements Runnable {
 
     private ArrayList<Integer> subZ;
 
-    private int partialSum;
+    private long partialSum;
 
     public ClientHandler(Socket clientSocket, ArrayList<Integer> subZ) throws IOException {
         this.client = clientSocket;
@@ -24,7 +24,7 @@ public class ClientHandler implements Runnable {
 
     }
 
-    public int getPartialSum() {
+    public long getPartialSum() {
         return this.partialSum;
     }
 
@@ -45,7 +45,7 @@ public class ClientHandler implements Runnable {
                 System.out.println(msg);
                 // If the client has finished summing the sub-list
                 if (msg.contains("subSum=")) {
-                    partialSum = Integer.parseInt(msg.split("=")[1].trim());
+                    partialSum = Long.parseLong(msg.split("=")[1].trim());
                     break;
                 }
 

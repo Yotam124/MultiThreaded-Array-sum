@@ -16,7 +16,7 @@ public class Server {
     private ExecutorService pool;
     private ArrayList<Integer> zList;
 
-    private int sum;
+    private long sum;
 
 
     public Server(int port, int X, int Z) {
