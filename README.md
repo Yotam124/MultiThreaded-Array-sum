@@ -7,7 +7,7 @@ This is a Multi-Threaded Java application that calculates the sum of all Z integ
 * Z = List of numbers in the range of 1 to Z in ascending order.
 * Y = Number of cores for each client.
 
-## Usage
+## Run
 Open two cmd windows directed into the project's src folder
 #### 1. Compile & Run the ***Server***
   * cmd window 1
